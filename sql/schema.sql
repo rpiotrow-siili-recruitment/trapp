@@ -14,11 +14,11 @@ CREATE TABLE users (
 CREATE TABLE trainings (
   id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50),
-  "limit" INTEGER,
+  participants_limit INTEGER,
   date TIMESTAMP,
   duration INTEGER,
   description TEXT,
-  organizer_id INTEGER,
+  organizer_id INTEGER UNSIGNED,
   room_id INTEGER,
 
   CONSTRAINT fk_trainings_organizer
@@ -26,8 +26,8 @@ CREATE TABLE trainings (
 );
 
 CREATE TABLE training_user (
-  training_id INTEGER,
-  user_id INTEGER,
+  training_id INTEGER UNSIGNED,
+  user_id INTEGER UNSIGNED,
 
   CONSTRAINT fk_training_user_training
     FOREIGN KEY (training_id) REFERENCES trainings (id),
