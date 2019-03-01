@@ -1,0 +1,28 @@
+service: node
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment: # Move to SSM SecureString
+    DB_HOST: ${env:DB_HOST}
+    DB_USER: ${env:DB_USER}
+    DB_PSSWD: ${env:DB_PSSWD}
+    DB_NAME: ${env:DB_NAME}
+
+functions:
+  create:
+    handler: src/handler.create
+    events:
+      - http:
+          path: api/trainings
+          method: post
+  get:
+    handler: src/handler.getTraining
+    events:
+      - http:
+          path: api/trainings/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
