@@ -1,0 +1,18 @@
+service: trapp
+
+frameworkVersion: "=1.38.0"
+
+provider:
+  name: aws
+  runtime: java8
+
+package:
+  artifact: target/hello-dev.jar
+
+functions:
+  getTrainings:
+    handler: com.serverless.GetTrainings
+    events:
+     - http:
+         path: api/trainings
+         method: get
